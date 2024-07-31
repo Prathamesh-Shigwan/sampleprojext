@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+{% block title %}Home{% endblock %}
+</head>
+<body>
+{% block content %}
+
+
+
+        <!-- End Offset Wrapper -->
+        <div class="ht__bradcaump__area bradcaump--2">
+            <div class="google__map">
+                <div class="map-contacts">
+                    <div id="googleMap2"></div>
+                </div>
+            </div>
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                                  <span class="breadcrumb-item active">Product</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Bradcaump area -->
+        <!-- Start Product Grid -->
+        <section class="htc__product__grid bg__white ptb--70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="htc__product__leftsidebar">
+                            <h2 class="title__line--3">shop by</h2>
+                            <!-- Start Category Area -->
+                            <div class="htc__category">
+                                <h4 class="title__line--4">by categories</h4>
+                                <ul class="ht__cat__list">
+                                    <!-- All Products Link -->
+                                    <li><a href="{% url 'products:product_grid' %}"><strong>All</strong></a><span class="category-count">{{ products.count }}</span></li>
+
+                                    <!-- Individual Main Categories Links -->
+                                    {% for main_category in main_categories %}
+                                        <li>
+                                            <a href="{% url 'products:product_grid_by_main_category' main_category.cid %}"><strong>{{ main_category.title }}</strong></a>
+                                            <span class="category-count">{{ main_category.subcategories.all.count }}</span>
+                                            <ul class="submenu">
+                                                <!-- Subcategories under this Main Category -->
+                                                {% for subcategory in main_category.subcategories.all %}
+                                                    <li>
+                                                        <a href="{% url 'products:product_grid_by_sub_category' subcategory.sid %}"><strong>{{ subcategory.title }}</strong></a>
+                                                        <span class="category-count">{{ subcategory.products.count }}</span>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <style>
+                                    .ht__cat__list .submenu {
+                                        display: none;
+                                    }
+
+                                    .ht__cat__list li:hover > .submenu {
+                                        display: block;
+                                    }
+                                </style>
+                            </div>
+                            <!-- End Category Area -->
+                            <!-- Start Prize Range -->
+                                <div class="htc-grid-range">
+                                    <h4 class="title__line--4">by price</h4>
+                                    <div class="content-shopby">
+                                        <div class="price_filter s-filter clear">
+                                            <div id="slider-range"></div>
+                                            <div class="slider__range--output">
+                                                <div class="price__output--wrap">
+                                                    <div class="price--output">
+                                                        <span>Price: </span>
+                                                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                    </div>
+                                                    <div class="price--filter">
+                                                        <button id="filter-button" style="background-color: #3fd9b2; color: #fff; border: none; padding: 10px 20px; cursor: pointer;">
+                                                            Filter
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                $( function() {
+                                    $( "#slider-range" ).slider({
+                                        range: true,
+                                        min: 0,
+                                        max: 500, // Set this to the maximum price of your products or dynamically from your backend
+                                        values: [ 75, 300 ], // Initial range
+                                        slide: function( event, ui ) {
+                                            $( "#amount" ).val( "₹" + ui.values[ 0 ] + " - ₹" + ui.values[ 1 ] );
+                                        }
+                                    });
+                                    $( "#amount" ).val( "₹" + $( "#slider-range" ).slider( "values", 0 ) +
+                                        " - ₹" + $( "#slider-range" ).slider( "values", 1 ) );
+
+                                    $('#filter-button').click(function() {
+                                        var minPrice = $( "#slider-range" ).slider( "values", 0 );
+                                        var maxPrice = $( "#slider-range" ).slider( "values", 1 );
+                                        // Redirect or AJAX call to filter products
+                                        window.location.href = "{% url 'products:product_grid' %}?min_price=" + minPrice + "&max_price=" + maxPrice;
+                                    });
+                                });
+                                </script>
+
+                            <!-- End Prize Range -->
+                            <!-- Start Pro Color -->
+                            <div class="ht__pro__color">
+                                <h4 class="title__line--4">by color</h4>
+                                <ul class="ht__color__list">
+                                    {% for color_value, color_name in color_choices %}
+                                        <li class="{{ color_value }}">
+                                            <a href="{% url 'products:product_grid' %}?color={{ color_value }}">{{ color_name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-xs-12 smt-40 xmt-40">
+                        <div class="htc__product__rightidebar">
+                            <div class="htc__grid__top">
+                                <div class="htc__select__option">
+                                    <select class="ht__select">
+                                        <option>Default softing</option>
+                                        <option>Default softing</option>
+                                        <option>Default softing</option>
+                                        <option>Default softing</option>
+                                    </select>
+                                    <select class="ht__select">
+                                        <option>Show by</option>
+                                        <option>Show by</option>
+                                        <option>Show by</option>
+                                        <option>Show by</option>
+                                    </select>
+                                </div>
+                                <div class="ht__pro__qun">
+                                    <span>Showing 1-12 of 1033 products</span>
+                                </div>
+                                <!-- Start List And Grid View -->
+                                <ul class="view__mode" role="tablist">
+                                    <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
+                                    <li role="presentation" class="list-view"><a href="#list-view" role="tab" data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
+                                </ul>
+                                <!-- End List And Grid View -->
+                            </div>
+                            <!-- Start Product View -->
+                            <div class="row">
+                                <div class="shop__grid__view__wrap">
+                                    <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
+                                        <!-- Start Single Product -->
+                            {% for p in products %}
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="product">
+                                    <div class="product__thumb">
+                                        <!-- Updated link here with correct variable p and attribute pid -->
+                                        <a href="{% url 'products:product_details' p.pid %}">
+                                            <img src="{{ p.image.url }}" alt="{{ p.title }}">
+                                        </a>
+                                        <div class="product__offer">
+                                            <span class="new">new</span>
+                                            <span>{{ p.get_percentage|floatformat }}</span>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li class="add-to-wishlist-{{ p.id }}" data-product-item="{{ p.id }}" id="add-to-cart-bnt"><a><i class="icon-heart icons"></i></a></li>
+                                                <script>
+                                                    $(document).on("click", ".add-to-wishlist-{{ p.id }}", function() {
+                                                        let product_id = $(this).attr("data-product-item");
+                                                        let this_val = $(this);
+
+                                                        console.log("Product ID is", product_id);
+
+                                                        $.ajax({
+                                                            url: "{% url 'products:add_to_wishlist' %}",
+                                                            type: "POST",
+                                                            data: {
+                                                                "id": product_id,
+                                                                "csrfmiddlewaretoken": $('meta[name="csrf-token"]').attr('content') // Getting CSRF token from meta tag
+                                                            },
+                                                            dataType: "json",
+                                                            beforeSend: function() {
+                                                                console.log("Adding to wishlist...");
+                                                            },
+                                                            success: function(response) {
+                                                                if (response.bool) {
+                                                                    this_val.html("<a><i class=\"fa fa-check-square\" aria-hidden=\"true\"></i></i></a>");
+                                                                    console.log(response.message); // "Product added to wishlist"
+                                                                } else {
+                                                                    console.log(response.message); // "Product already in wishlist" or "Product not found"
+                                                                }
+                                                            },
+                                                            error: function() {
+                                                                console.log("Error in adding to wishlist");
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+
+
+                                                <li class="ht__addto__cart">
+                                                <button class="add-to-cart-btn-{{ p.pid }}" data-pid="{{ p.pid }}" data-url="{% url 'products:add_to_cart' p.pid %}">
+                                                    <a><i class="icon-handbag icons"></i></a>
+                                                </button>
+                                                </li>
+
+                                                <li><a href="{{ p.url }}"><i class="icon-shuffle icons"></i></a></li>
+
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        // Using event delegation
+                                                        $('.htc__product__rightidebar').on('click', '.add-to-cart-btn-{{ p.pid }}', function(event) {
+                                                            event.preventDefault();  // Prevent the default form submission
+
+                                                            var productId = $(this).data('pid');  // Get the product ID from data-pid attribute
+                                                            var url = $(this).data('url');  // Get the URL from data-url attribute
+
+                                                            // Make the POST request using jQuery's AJAX
+                                                            $.ajax({
+                                                                url: url,
+                                                                type: 'POST',
+                                                                data: JSON.stringify({ product_id: productId, quantity: 1 }),
+                                                                contentType: 'application/json',
+                                                                headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                                                                success: function(data) {
+                                                                    if (data.success) {
+                                                                        alert('Product added to cart. Total items: ' + data.total_items);
+                                                                    } else {
+                                                                        alert('Failed to add product to cart: ' + data.error);
+                                                                    }
+                                                                },
+                                                                error: function(error) {
+                                                                    console.error('Error adding product to cart:', error);
+                                                                }
+                                                            });
+                                                        });
+
+                                                        // Function to get CSRF token from cookies
+                                                        function getCookie(name) {
+                                                            var cookieValue = null;
+                                                            if (document.cookie && document.cookie !== '') {
+                                                                var cookies = document.cookie.split(';');
+                                                                for (var i = 0; i < cookies.length; i++) {
+                                                                    var cookie = cookies[i].trim();
+                                                                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                                                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            return cookieValue;
+                                                        }
+                                                    });
+                                                </script>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product__inner">
+                                                    <div class="product__details">
+                                                        <h2><a href="{% url 'products:product_details' p.pid %}">{{ p.name }}</a></h2>
+                                                        <ul class="pro__prize">
+                                                            <li class="old__prize">&#8377;  {{ p.old_price }}</li>
+                                                            <li>&#8377;  {{ p.price }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Product -->
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Product View -->
+                        </div>
+                        <!-- Start Pagenation -->
+                    <div class="htc__pagenation">
+                        <ul class="pagination">
+                            {% if products.has_previous %}
+                                <li><a href="?page=1">&laquo; First</a></li>
+                                <li><a href="?page={{ products.previous_page_number }}">&lsaquo; Previous</a></li>
+                            {% endif %}
+
+                            {% for num in products.paginator.page_range %}
+                                {% if products.number == num %}
+                                    <li class="active"><a href="#">{{ num }}</a></li>
+                                {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                                    <li><a href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if products.has_next %}
+                                <li><a href="?page={{ products.next_page_number }}">Next &rsaquo;</a></li>
+                                <li><a href="?page={{ products.paginator.num_pages }}">Last &raquo;</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                        <!-- End Pagenation -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Product Grid -->
+        <!-- Start Brand Area -->
+        <div class="htc__brand__area pb--70 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ht__brand__inner">
+                            <ul class="brand__list owl-carousel owl-theme clearfix">
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/3.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/4.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/5.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Brand Area -->
+        <!-- Start Banner Area -->
+        <div class="htc__banner__area">
+            <ul class="banner__list owl-carousel owl-theme clearfix">
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/3.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/4.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/5.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/6.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images"></a></li>
+            </ul>
+        </div>
+        <!-- End Banner Area -->
+        <!-- End Banner Area -->
+
+
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bradcaump--2">
+            <div class="google__map">
+                <div class="map-contacts">
+                    <div id="googleMap2"></div>
+                </div>
+            </div>
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                                  <span class="breadcrumb-item active">Blog</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<section class="htc__blog__details bg__white ptb--70">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="htc__blog__details__wrap">
+                    <span class="ht__fashion__show">fashion week show</span>
+                    <h2>{{ blog.title }}</h2>
+                    <ul class="ht__blog__meta">
+                        <li><i class="icon-clock icons"></i>{{ blog.created_at|date:"d M, Y" }}</li>
+                        <li><i class="icon-pencil icons"></i>{{ blog.author }}</li>
+                    </ul>
+                    <div class="ht__bl__thumb">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                    </div>
+                    <div class="bl__dtl">
+                        <p>{{ blog.content|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

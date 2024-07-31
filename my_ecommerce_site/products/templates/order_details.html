@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    {% block title %}Order Details{% endblock %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header, .section {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #333;
+        }
+        .section h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .section p {
+            margin: 0;
+        }
+        .section address {
+            margin: 0;
+        }
+        .addresses {
+            display: flex;
+            justify-content: space-between;
+        }
+        .address-section {
+            width: 48%;
+        }
+        .order-summary table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-summary th, .order-summary td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+{% block content %}
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Order Details: #Order-{{ order.id }}</h1>
+    </header>
+    <section class="section">
+        <h2>Order Information</h2>
+        <p><strong>Order Created at:</strong> {{ order.created_at|date:"d/m/Y" }} at {{ order.created_at|time:"h:i A" }}</p>
+        <p><strong>Name:</strong> {{ billing_address.full_name }} </p>
+        <p><strong>Email:</strong> {{ order.user.email }}</p>
+        <p><strong>Contact No:</strong> 202-906-12354</p> <!-- Replace with actual contact number if available -->
+    </section>
+    <section class="section addresses">
+<div class="address-section">
+    <h2>Billing Address</h2>
+    <address>
+        <p>{{ billing_address.full_name }}</p>
+        <p>{{ billing_address.email }}</p>
+        <p>{{ billing_address.address1 }}</p>
+        <p>{{ billing_address.address2 }}</p>
+        <p>{{ billing_address.city }}, {{ billing_address.state }} {{ billing_address.zipcode }}</p>
+        <p>{{ billing_address.country }}</p>
+        <p>Phone: {{ billing_address.phone }}</p>
+    </address>
+</div>
+<div class="address-section">
+    <h2>Shipping Address</h2>
+    <address>
+        <p>{{ shipping_address.full_name }}</p>
+        <p>{{ shipping_address.email }}</p>
+        <p>{{ shipping_address.address1 }}</p>
+        <p>{{ shipping_address.address2 }}</p>
+        <p>{{ shipping_address.city }}, {{ shipping_address.state }} {{ shipping_address.zipcode }}</p>
+        <p>{{ shipping_address.country }}</p>
+        <p>Phone: {{ shipping_address.phone }}</p>
+    </address>
+</div>
+
+    </section>
+    <section class="section order-summary">
+        <h2>Order Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="max-height: 100px; display: block; margin: 0 auto;">
+                    </td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.sku }}</td>
+                    <td>x {{ item.quantity }}</td>
+                    <td>&#8377; {{ item.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+    </section>
+</div>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{% block title %}Home{% endblock %}
+</head>
+<body>
+{% block content %}
+
+
+
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bradcaump--2">
+            <div class="google__map">
+                <div class="map-contacts">
+                    <div id="googleMap2"></div>
+                </div>
+            </div>
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                                  <span class="breadcrumb-item active">Contact</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        <!-- Start Contact Area -->
+        <section class="htc__contact__area ptb--70 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2 class="title__line--6">CONTACT US</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Start Single Address -->
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                        <div class="address">
+                            <div class="address__icon">
+                                <i class="icon-location-pin icons"></i>
+                            </div>
+                            <div class="address__details">
+                                <h2 class="ct__title">our address</h2>
+                                <p>666 5th Ave New York, NY, United </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Address -->
+                    <!-- Start Single Address -->
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 xmt-40">
+                        <div class="address--2">
+                            <p><a href="#"><i class="icon-call-end icons"></i>716-298-1822 </a></p>
+                            <p><a href="#"><i class="icon-envelope icons"></i>info@plazathemes.com</a></p>
+                        </div>
+                    </div>
+                    <!-- End Single Address -->
+                    <!-- Start Single Address -->
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 smt-40 xmt-40">
+                        <div class="address">
+                            <div class="address__icon">
+                                <i class="icon-envelope icons"></i>
+                            </div>
+                            <div class="address__details">
+                                <h2 class="ct__title">openning hour</h2>
+                                <p>666 5th Ave New York, NY, United </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Address -->
+                </div>
+                <div class="row">
+                    <div class="contact-form-wrap mt--70">
+                        <div class="col-xs-12">
+                            <div class="contact-title">
+                                <h2 class="title__line--6">Give Us An Email</h2>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <form id="contact-form" method="post" action="{% url 'products:contact' %}">
+    {% csrf_token %}
+    <div class="single-contact-form">
+        <div class="contact-box name">
+            <!-- Render the name field manually -->
+            <input type="text" name="name" placeholder="Your Name*" value="{{ form.name.value|default_if_none:'' }}" required>
+            {{ form.name.errors }}
+            <!-- Render the email field manually -->
+            <input type="email" name="email" placeholder="Mail*" value="{{ form.email.value|default_if_none:'' }}" required>
+            {{ form.email.errors }}
+        </div>
+    </div>
+    <div class="single-contact-form">
+        <div class="contact-box subject">
+            <!-- Render the subject field manually -->
+            <input type="text" name="subject" placeholder="Subject*" value="{{ form.subject.value|default_if_none:'' }}" required>
+            {{ form.subject.errors }}
+        </div>
+    </div>
+    <div class="single-contact-form">
+        <div class="contact-box message">
+            <!-- Render the message textarea manually -->
+            <textarea name="message" placeholder="Your Message">{{ form.message.value|default_if_none:'' }}</textarea>
+            {{ form.message.errors }}
+        </div>
+    </div>
+    <div class="contact-btn">
+        <button type="submit" class="fv-btn"><i class="icon-envelope icons"></i>SEND</button>
+        {% if success_message %}
+<div class="alert alert-success">
+    {{ success_message }}
+</div>
+{% endif %}
+    </div>
+</form>
+
+                            <div class="form-output">
+                                <p class="form-messege"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Contact Area -->
+        <!-- Start Brand Area -->
+        <div class="htc__brand__area pb--70 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ht__brand__inner">
+                            <ul class="brand__list owl-carousel owl-theme clearfix">
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/3.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/4.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/5.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Brand Area -->
+        <!-- Start Banner Area -->
+        <div class="htc__banner__area">
+            <ul class="banner__list owl-carousel owl-theme clearfix">
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/3.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/4.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/5.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/6.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images"></a></li>
+                <li><a href="{% url 'products:product_details' %}"><img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images"></a></li>
+            </ul>
+        </div>
+        <!-- End Banner Area -->s
+        <!-- Start Footer Area -->
+
+
+
+{% endblock %}
+</body>
+</html>
+
+
+

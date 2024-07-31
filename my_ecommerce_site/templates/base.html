@@ -1,0 +1,640 @@
+
+
+<!doctype html>
+{% load static %}
+
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}My Django Project{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- CSS ================================================== -->
+  <link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/timber.css?v=145475665773406217891642829930" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/preloader.css?v=91689511410486745351642829929" rel="stylesheet" type="text/css" media="all" />
+
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/bootstrap.min.css?v=156186130733895866451642829860" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/owl.carousel.min.css?v=100847393044616809951642829888" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/owl.theme.default.min.css?v=143489350201050077611642829889" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/material-design-iconic-font.min.css?v=8996130352833348591642829883" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/simple-line-icons.css?v=49402511247700599821642829900" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/font-awesome.css?v=132324219581463622051642829866" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/animate.css?v=76902959087579964801642829858" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/default.css?v=135376324030500118621642829864" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/jquery-ui.css?v=60864537659009408731642829879" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/slick.css?v=72376615944862524581642829903" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/slick-theme.css?v=111566387709569418871642829906" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/meanmenu.css?v=166853305284171852081642829885" rel="stylesheet" type="text/css" media="all" />
+<link href="https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400i,700|Poppins:300,400,400i,500,600,700,800" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/header.css?v=45901671126607568111642829872" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/slider.css?v=62863605607113459081642829907" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/footer.css?v=108822877552218622351642829869" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/style.css?v=173149320853168812351642829907" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/custom.css?v=142810439435085711651642829863" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/skin-theme.css?v=109346024196472760951642829930" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/theme-color.css?v=123267244954869539091642829929" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/responsive.css?v=13779263914408752331642829898" rel="stylesheet" type="text/css" media="all" />
+<link href="//eme-1.myshopify.com/cdn/shop/t/8/assets/theme-responsive.css?v=164631842593524000261642829910" rel="stylesheet" type="text/css" media="all" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+    
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+
+    <!-- All css files are included here. -->
+    <!-- Bootstrap fremwork main css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Owl Carousel min css -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <!-- This core.css file contents all plugings css file. -->
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href="{% static 'css/shortcode/shortcodes.css' %}">
+    <!-- Theme main style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- User style -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loginstyles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Modernizr JS -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+<body>
+
+    <!-- Body main wrapper start -->
+    <div class="wrapper">
+        <!-- Start Header Style -->
+        <header id="htc__header" class="htc__header__area header--one">
+            <div class="header__top__area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12">
+                            <div class="ht__header__top__left">
+                                <ul class="select__language hidden-sm hidden-xs">
+                                    <li class="drop--lan"><a href="#">eng</a>
+                                        <ul class="language__option">
+                                            <li><a href="#">Engish</a></li>
+                                            <li><a href="#">French</a></li>
+                                            <li><a href="#">German</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="drop--lan"><a href="#">usd</a>
+                                        <ul class="language__option">
+                                            <li><a href="#">USD</a></li>
+                                            <li><a href="#">EUR</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="htc__contact">
+                                    <a href="#"><i class="icon-call-out icons"></i>Call Us: +800 123 4567</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12">
+                            <div class="logo">
+                                <a href="{% url 'home' %}">
+                                    <img src="{% static 'images/logo/eme.png' %}" alt="logo images">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12">
+                            <ul class="ht__header__right">
+                                <li><a href="{% url 'products:about' %}">About</a></li>
+                                <li><a href="{% url 'accounts:user_profile' %}">Account</a></li>
+                                {% if user.is_authenticated %}
+                                <!-- If the user is authenticated, display the logout link -->
+                                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                                {% else %}
+                                <!-- If the user is not authenticated, display the login link -->
+                                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'products:wishlist' %}">Wishlist</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Start Mainmenu Area -->
+            <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="menumenu__container clearfix">
+                            <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
+                                <div class="header__search search search__open">
+                                    <a href="#"><i class="icon-magnifier icons"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-6 col-xs-5">
+                                <nav class="main__menu__nav hidden-xs hidden-sm">
+                                    <ul class="main__menu">
+                                        <li class="drop"><a href="{% url 'home' %}">Home <i class="zmdi zmdi-chevron-down"></i></a>
+                                        </li>
+                                        <!--<li class="drop"><a href="{% url 'products:product_grid' %}">Shop <i class="zmdi zmdi-chevron-down"></i></a>
+
+                                        </li>-->
+
+                                        <li class="drop"><a href="#">women <i class="zmdi zmdi-chevron-down"></i></a>
+                                            <ul class="dropdown mega_dropdown">
+                                                {% for main_category in main_categories %}
+                                                <!-- Start Single Mega MEnu -->
+                                                <li><a class="mega__title" href="#">{{ main_category.title }}</a>
+                                                    <ul class="mega__item">
+                                                        {% for sub_category in main_category.subcategories.all %}
+                                                        <li><a href="{% url 'products:product_grid_by_sub_category' sub_category.sid %}?gender=female,unisex">{{ sub_category.title }}</a></li>
+                                                        {% endfor %}
+
+                                                    </ul>
+                                                </li>
+                                                <!-- End Single Mega MEnu -->
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        <li class="drop"><a href="#">MEN <i class="zmdi zmdi-chevron-down"></i></a>
+                                            <ul class="dropdown mega_dropdown">
+                                                {% for main_category in main_categories %}
+                                                <!-- Start Single Mega MEnu -->
+                                                <li><a class="mega__title" href="#">{{ main_category.title }}</a>
+                                                    <ul class="mega__item">
+                                                        {% for sub_category in main_category.subcategories.all %}
+                                                        <li><a href="{% url 'products:product_grid_by_sub_category' sub_category.sid %}?gender=male,unisex">{{ sub_category.title }}</a></li>
+                                                        {% endfor %}
+
+                                                    </ul>
+                                                </li>
+                                                <!-- End Single Mega MEnu -->
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li><a href="{% url 'blog_list' %}">blog</a></li>
+                                        <li><a href="{% url 'products:contact' %}">contact</a></li>
+                                        <li class="drop"><a href="#">Account<i class="zmdi zmdi-chevron-down"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="{% url 'accounts:user_profile' %}">User Profile</a></li>
+                                                <li><a href="{% url 'products:order_tracking' %}">Order's</a></li>
+                                                <li><a href="#">contact</a></li>
+                                                <li><a href="#">product grid</a></li>
+                                                <li><a href="#">product list</a></li>
+                                                <li><a href="#">product details</a></li>
+                                                <li><a href="#">wishlist</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <div class="mobile-menu clearfix visible-xs visible-sm">
+                                    <nav id="mobile_dropdown">
+                                        <ul>
+                                            <li><a href="{% url 'products:home' %}">Home</a>
+                                            </li>
+                                            <li><a href="{% url 'products:product_services' %}">About</a></li>
+                                            <li><a href="{% url 'products:product_grid' %}">Shop</a></li>
+                                            <li><a href="{% url 'products:contact' %}">contact</a></li>
+                                            <li class="drop"><a href="#">Pages <i class="zmdi zmdi-chevron-down"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                                <li><a href="cart.html">Cart page</a></li>
+                                                <li><a href="rawcheckout.html">checkout</a></li>
+                                                <li><a href="contact.html">contact</a></li>
+                                                <li><a href="product-grid.html">product grid</a></li>
+                                                <li><a href="product-list.html">product list</a></li>
+                                                <li><a href="product-details.html">product details</a></li>
+                                                <li><a href="wishlist.html">wishlist</a></li>
+                                            </ul>
+                                        </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-sm-3 col-xs-4">
+                                <div class="htc__shopping__cart">
+                                    <a class="cart__menu" href="{% url 'products:cart_view' %}"><i class="icon-handbag icons"></i></a>
+                                    <a href="#"><span class="htc__qua">{{ item_count }}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-area"></div>
+                </div>
+            </div>
+            <!-- End Mainmenu Area -->
+        </header>
+        <!-- End Header Area -->
+
+           </div>
+         {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    <strong>{{message}}</strong>
+                </div>
+
+        {% endfor %}
+        {% block content %}
+        <!-- This block will be overridden by child templates -->
+        {% endblock %}
+        <script>
+            setTimeout(() => {
+                $(".alert").alert("close")
+            }, 3000)
+        </script>
+
+                <footer id="htc__footer">
+            <!-- Start Footer Top Area -->
+            <div class="footer__top__area bg__cat--1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer__top__wrap clearfix">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="footer__top">
+                                            <div class="ft__logo">
+                                                <a href="{% url 'home' %}">
+                                                    <img src="{% static 'images/logo/eme.png' %}" alt="logo">
+                                                </a>
+                                            </div>
+                                            <div class="ft__address__wrap">
+                                                <div class="ft__address">
+                                                    <div class="ft__title">
+                                                        <h4><i class="icon-location-pin icons"></i>Our Adress</h4>
+                                                    </div>
+                                                    <div class="ft__details">
+                                                        <p>49th Street, Los Angeles, CA, United States.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="ft__address">
+                                                    <div class="ft__title">
+                                                        <h4><i class="icon-call-out icons"></i>Our Phone</h4>
+                                                    </div>
+                                                    <div class="ft__details">
+                                                        <p>Call Us : (800) - 123 5678 </p>
+                                                    </div>
+                                                </div>
+                                                <div class="ft__address">
+                                                    <div class="ft__title">
+                                                        <h4><i class="icon-envelope icons"></i>email for us</h4>
+                                                    </div>
+                                                    <div class="ft__details">
+                                                        <p>49th Street, Los Angeles, CA, United States.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-6 col-xs-12 xmt-40">
+                                        <div class="google__map">
+                                            <div class="map-contacts">
+                                                <div id="googleMap"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Top Area -->
+            <!-- Start Footer Widget -->
+            <div class="footer__container bg__cat--1">
+                <div class="container">
+                    <div class="row">
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer">
+                                <h2 class="title__line--2">company info</h2>
+                                <div class="ft__details">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim adm.</p>
+                                    <div class="footer__btn">
+                                        <a href="#">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-2 col-sm-6 col-xs-12 xmt-40">
+                            <div class="footer">
+                                <h2 class="title__line--2">information</h2>
+                                <div class="ft__inner">
+                                    <ul class="ft__list">
+                                        <li><a href="{% url 'products:about' %}">About us</a></li>
+                                        <li><a href="{% url 'products:delivery_info' %}">Delivery Information</a></li>
+                                        <li><a href="{% url 'products:privacy_policy' %}">Privacy & Policy</a></li>
+                                        <li><a href="{% url 'products:terms_condition' %}">Terms  & Condition</a></li>
+                                        <li><a href="{% url 'products:return_refund' %}">Return and Refund</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-3 col-sm-6 col-xs-12 xmt-40 smt-40">
+                            <div class="footer">
+                                <h2 class="title__line--2">Our country</h2>
+                                <div class="ft__inner">
+                                    <ul class="lan__select">
+                                        <li><a href="#">India</a></li>
+                                            <ul class="drop__ountry">
+                                                <li><a href="#">United State</a></li>
+                                                <li><a href="#">United State</a></li>
+                                                <li><a href="#">United State</a></li>
+                                                <li><a href="#">United State</a></li>
+                                            </ul>
+
+                                    </ul>
+                                    <div class="ft__social__link">
+                                        <span>follow us</span>
+                                        <ul class="social__link">
+                                            <li><a href="https://twitter.com" target="_blank"><i class="icon-social-twitter icons"></i></a></li>
+
+                                            <li><a href="https://www.instagram.com" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
+
+                                            <li><a href="https://www.facebook.com" target="_blank"><i class="icon-social-facebook icons"></i></a></li>
+
+                                            <li><a href="https://plus.google.com/" target="_blank"><i class="icon-social-google icons"></i></a></li>
+
+                                            <li><a href="#" target="_blank"><i class="icon-social-linkedin icons"></i></a></li>
+
+                                            <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Widget -->
+            <!-- Start Copyright Area -->
+            <div class="htc__copyright bg__white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="copyright__inner">
+                                <p>Copyright© <a href="https://devitems.com/" target="blank">DevItems</a> 2017. All right reserved.</p>
+                                <a href="#"><img src="{% static 'images/others/shape/paypol.png' %}" alt="payment images"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Copyright Area -->
+        </footer>
+        <!-- End Footer Style -->
+    </div>
+    <!-- Body main wrapper end -->
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!-- jquery latest version -->
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <!-- Bootstrap framework js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+    <!-- Google Map js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo"></script>
+    <script>
+        // When the window has finished loading create our google map below
+        google.maps.event.addDomListener(window, 'load', init);
+
+        function init() {
+            // Basic options for a simple Google Map
+            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            var mapOptions = {
+                // How zoomed in you want the map to start at (always required)
+                zoom: 12,
+
+                scrollwheel: false,
+
+                // The latitude and longitude to center the map (always required)
+                center: new google.maps.LatLng(23.7286, 90.3854), // New York
+
+                // How you would like to style the map.
+                // This is where you would paste any style found on Snazzy Maps.
+                 styles:
+                [ {
+                        "featureType": "all",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#141516"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            // Get the HTML DOM element that will contain your map
+            // We are using a div with id="map" seen below in the <body>
+            var mapElement = document.getElementById('googleMap');
+
+            // Create the Google Map using our element and options defined above
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+            // Let's also add a marker while we're at it
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(23.7286, 90.3854),
+                map: map,
+                title: 'Ramble!',
+                icon: 'images/icons/map.png',     <!-- need to declare this later -->
+                animation:google.maps.Animation.BOUNCE
+
+            });
+        }
+    </script>
+
+
+
+    <!-- Waypoints.min.js. -->
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/function.jsx' %}"></script>
+
+</body>
+
+</html>

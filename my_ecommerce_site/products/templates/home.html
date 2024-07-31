@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{% block title %}Home{% endblock %}
+</head>
+<body>
+{% block content %}
+
+        <!-- End Offset Wrapper -->
+        <!-- Start Slider Area -->
+<div class="slider">
+    <div class="slide-track">
+        <div class="slide"><img src="{% static 'images/cameras.webp' %}" alt="Image 1"></div>
+        <div class="slide"><img src="{% static 'images/camera.jpg' %}" alt="Image 2"></div>
+        <div class="slide"><img src="{% static 'images/cam.jpg' %}" alt="Image 3"></div>
+
+
+    </div>
+</div>
+
+
+<style>
+    .slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 500px; /* or whatever height fits your design */
+}
+
+.slide-track {
+    display: flex;
+    min-width: 100%;
+    animation: scroll 80s linear infinite;
+}
+
+.slide {
+    flex: 0 0 auto;
+    width: 20%; /* Adjust based on how many slides you want visible at once */
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the slide area */
+}
+
+</style>
+
+<script>
+$(document).ready(function() {
+    const $track = $('.slide-track');
+    const $originalSlides = $track.children().clone();
+
+    // Append initial set of clones
+    $track.append($originalSlides.clone());
+
+    function checkAndAppendClones() {
+        const scrollLeft = $('.slider').scrollLeft();
+        const trackWidth = $track.width();
+        const viewWidth = $('.slider').width();
+
+        // Check if the end of the slide track is nearing the visible area
+        if (trackWidth - scrollLeft <= viewWidth * 2) {
+            $track.append($originalSlides.clone());
+        }
+    }
+
+    // Check periodically if we need to append clones
+    setInterval(checkAndAppendClones, 1000);
+
+    // Infinite scroll animation using requestAnimationFrame
+    function animate() {
+        const speed = 1; // pixels per frame
+        const newPos = $('.slider').scrollLeft() + speed;
+        $('.slider').scrollLeft(newPos);
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+});
+
+</script>
+        <!-- Start Slider Area -->
+        <!-- Start Category Area -->
+        <section class="htc__category__area pt--70 pb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section__title--2">
+                            <h2 class="title__line">Our Categories</h2>
+                            <p># Trending This Season</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="htc__product__container">
+                    <div class="row">
+                        <div class="product__list clearfix mt--30">
+
+                            {% for m in main_categories %}
+                            <!-- Start Single Category -->
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 single__pro">
+                                <div class="category">
+                                    <div class="ht__cat__thumb">
+                                        <a href="{% url 'products:product_grid_by_category' m.cid %}">
+                                            <img src=" {{ m.image.url }} " alt="product images">
+                                        </a>
+                                    </div>
+                                    <div class="cat__hover__info">
+                                        <div class="cat__hover__inner">
+                                            <h2><a href="{% url 'products:product_details' %}">{{ m.title }}</a></h2>
+                                            <span>{{ m.price }} &#8377; </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Category -->
+                            {% endfor %}
+                            <!-- End Single Category  9 products in total by default -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Category Area -->
+        <!-- Start Prize Good Area -->
+        <!-- End Prize Good Area -->
+        <!-- Start Product Area -->
+<!--        <section class="htc__product__area pb&#45;&#45;70">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12">-->
+<!--                        <div class="section__title text&#45;&#45;left">-->
+<!--                            <h2 class="title__line title__border">New Arrivals</h2>-->
+<!--                            <p># Trending This Season</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="product__wrap activation__style&#45;&#45;1 owl-carousel owl-theme clearfix">-->
+<!--                        &lt;!&ndash; Start Single Product &ndash;&gt;-->
+<!--                        {% for p in products %}-->
+<!--                        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">-->
+<!--                            <div class="product">-->
+<!--                                <div class="product__thumb">-->
+<!--                                    <a href="{% url 'products:product_details' %}">-->
+<!--                                        &lt;!&ndash; Assuming 'image' is an ImageField in your Product model &ndash;&gt;-->
+<!--                                        <img src="{{ p.image.url }}" alt="{{ p.title }}">-->
+<!--                                    </a>-->
+<!--                                    <div class="product__offer">-->
+<!--                                        <span class="new">new</span>-->
+<!--                                        &lt;!&ndash; Example of showing a discount, adjust as necessary &ndash;&gt;-->
+<!--                                        <span>{{ p.get_percentage| floatformat }}</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__hover__info">-->
+<!--                                        <ul class="product__action">-->
+<!--                                            <li><a href="{% url 'products:wishlist' %}"><i class="icon-heart icons"></i></a></li>-->
+<!--                                            <li><a href="{% url 'products:cart_view' %}"><i class="icon-handbag icons"></i></a></li>-->
+<!--                                            <li><a href="#"><i class="icon-shuffle icons"></i></a></li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="product__inner">-->
+<!--                                    <div class="product__details">-->
+<!--                                        <h2><a href="{% url 'products:product_details'%}">{{ p.title }}</a></h2>-->
+<!--                                        <ul class="pro__prize">-->
+<!--                                            &lt;!&ndash; Displaying product price, adjust as needed &ndash;&gt;-->
+<!--                                            <li class="old__prize">&#8377; {{ p.old_price }}</li>-->
+<!--                                            <li>&#8377; {{ p.price }}</li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                        &lt;!&ndash; End Single Product &ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
+        <!-- End Product Area -->
+        <!-- Start Testimonial Area -->
+        <section class="htc__testimonial__area bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="ht__testimonial__activation clearfix">
+                        <!-- Start Single Testimonial -->
+                        <div class="col-lg-6 col-md-6 single__tes">
+                            <div class="testimonial">
+                                <div class="testimonial__thumb">
+                                    <img src="{% static 'images/test/client/1.png' %}" alt="testimonial images">
+                                    <span class="quote"><img src="{% static 'images/others/shape/quote.png' %}" alt="quote"></span>
+                                </div>
+                                <div class="testimonial__details">
+                                    <h4><a href="#">Mr.Mike Band</a></h4>
+                                    <p>I’m up to something. Stay focused. The weather is amazing, walk with me through the pathway of more success. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Testimonial -->
+                        <!-- Start Single Testimonial -->
+                        <div class="col-lg-6 col-md-6 single__tes">
+                            <div class="testimonial">
+                                <div class="testimonial__thumb">
+                                    <img src="{% static 'images/test/client/2.png' %}" alt="testimonial images">
+                                    <span class="quote"><img src="{% static 'images/others/shape/quote.png' %}" alt="quote"></span>
+                                </div>
+                                <div class="testimonial__details">
+                                    <h4><a href="#">Ms.Lucy Barton</a></h4>
+                                    <p>I’m up to something. Stay focused. The weather is amazing, walk with me through the pathway of more success. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Testimonial -->
+                        <!-- Start Single Testimonial -->
+                        <div class="col-lg-6 col-md-6 single__tes">
+                            <div class="testimonial">
+                                <div class="testimonial__thumb">
+                                    <img src="{% static 'images/test/client/1.png' %}" alt="testimonial images">
+                                    <span class="quote"><img src="{% static 'images/others/shape/quote.png' %}" alt="quote"></span>
+                                </div>
+                                <div class="testimonial__details">
+                                    <h4><a href="#">Ms.Lucy Barton</a></h4>
+                                    <p>I’m up to something. Stay focused. The weather is amazing, walk with me through the pathway of more success. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Testimonial -->
+                        <!-- Start Single Testimonial -->
+                        <div class="col-lg-6 col-md-6 single__tes">
+                            <div class="testimonial">
+                                <div class="testimonial__thumb">
+                                    <img src="{% static 'images/test/client/2.png' %}" alt="testimonial images">
+                                    <span class="quote"><img src="{% static 'images/others/shape/quote.png' %}" alt="quote"></span>
+                                </div>
+                                <div class="testimonial__details">
+                                    <h4><a href="#">Ms.Lucy Barton</a></h4>
+                                    <p>I’m up to something. Stay focused. The weather is amazing, walk with me through the pathway of more success. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Testimonial -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Testimonial Area -->
+
+        <!-- Start Brand Area -->
+        <div class="htc__brand__area pb--70 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ht__brand__inner">
+                            <ul class="brand__list owl-carousel clearfix">
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/3.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/4.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/5.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/5.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/1.png' %}" alt="brand images"></a></li>
+                                <li><a href="#"><img src="{% static 'images/brand/2.png' %}" alt="brand images"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Brand Area -->
+        <!-- Start Banner Area -->
+        <div class="htc__instagram__area">
+            <ul class="htc__instagram__posts owl-carousel clearfix">
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/3.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/4.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/5.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/6.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/1.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="{% static 'images/banner/bn-3/2.jpg' %}" alt="banner images">
+                        <i class="zmdi zmdi-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Banner Area -->
+        <!-- End Banner Area -->
+
+
+
+{% endblock %}
+</body>
+</html>
+
+
+
+
+

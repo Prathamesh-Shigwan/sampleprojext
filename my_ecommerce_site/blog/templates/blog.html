@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+        <!-- Start Bradcaump area -->
+        <div class="ht__bradcaump__area bradcaump--2">
+            <div class="google__map">
+                <div class="map-contacts">
+                    <div id="googleMap2"></div>
+                </div>
+            </div>
+            <div class="ht__bradcaump__wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bradcaump__inner">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                                  <span class="breadcrumb-item active">Blog</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<section class="htc__blog__area bg__white pb--70">
+    <div class="container">
+        <div class="row">
+            <div class="ht__blog__wrap blog--page clearfix">
+                {% for blog in blogs %}
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                    <div class="blog">
+                        <div class="blog__thumb">
+                            <a href="{{ blog.get_absolute_url }}">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                            </a>
+                            <div class="bl_hover">
+                                <span>fashion</span>
+                            </div>
+                        </div>
+                        <div class="blog__details">
+                            <h2><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+                            <ul class="ht__blog__meta">
+                                <li><i class="icon-clock icons"></i>{{ blog.created_at|date:"d M, Y" }}</li>
+                                <li><i class="icon-pencil icons"></i>{{ blog.author }}</li>
+                            </ul>
+                            <p>{{ blog.content|truncatewords:20|safe }}</p>
+                            <div class="blog__btn">
+                                <a href="{{ blog.get_absolute_url }}"><i class="zmdi zmdi-long-arrow-right"></i>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

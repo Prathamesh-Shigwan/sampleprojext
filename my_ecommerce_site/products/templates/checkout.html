@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}CheckOut{% endblock %}
+</head>
+<body>
+{% block content %}
+    <!-- Start Bradcaump area -->
+    <div class="ht__bradcaump__area bradcaump--2">
+        <div class="google__map">
+            <div class="map-contacts">
+                <div id="googleMap2"></div>
+            </div>
+        </div>
+        <div class="ht__bradcaump__wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="bradcaump__inner">
+                            <nav class="bradcaump-inner">
+                              <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+                              <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
+                              <span class="breadcrumb-item active">CheckOut</span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Bradcaump area -->
+
+    <!-- Start Checkout Area -->
+    <div class="checkout-wrap ptb--70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="checkout__inner">
+                        <div class="accordion-list">
+                            <div class="accordion">
+                                <!-- Form for Saving Billing and Shipping Info -->
+                                <form method="post" action="{% url 'products:save_info' %}">
+                                    {% csrf_token %}
+                                    <!-- Billing Information Section -->
+                                    <div class="accordion__title">
+                                        Billing Information
+                                    </div>
+                                    <div class="accordion__body">
+                                        <div class="bilinfo">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="single-input mt-0">
+                                                        {{ billing_form.billing_full_name }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_email }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_address1 }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_address2 }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_city }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_state }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_zipcode }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_country }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ billing_form.billing_phone }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Shipping Information Section -->
+                                    <div class="accordion__title">
+                                        Shipping Information
+                                    </div>
+                                    <div class="accordion__body">
+                                        <div class="shipinfo">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="single-input mt-0">
+                                                        {{ shipping_form.shipping_full_name }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_email }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_address1 }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_address2 }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_city }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_state }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_zipcode }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_country }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="single-input">
+                                                        {{ shipping_form.shipping_phone }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button for Saving Info -->
+                                    <div class="row">
+                                        <div class="col-12" style="text-align: center;">
+                                            <button type="submit" name="save_info" class="btn btn-primary" style="margin: 0 auto;">Update Billing & Shipping Info</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="order-details">
+                        <h5 class="order-details__title">Your Order</h5>
+                        {% for item in items %}
+                        <div class="order-details__item">
+                            <div class="single-item">
+                                <div class="single-item__thumb">
+                                    <img src="{{ item.product.image.url }}" alt="ordered item">
+                                </div>
+                                <div class="single-item__content">
+                                    <a href="#">{{ item.product.name }}</a>
+                                    <span class="price">&#8377; {{ item.product.price }}</span>
+                                    <span>x {{ item.quantity }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p>Your cart is empty.</p>
+                        {% endfor %}
+                        <div class="order-details__count">
+                            <div class="order-details__count__single">
+                                <h5>sub total</h5>
+                                <span class="price">&#8377; {{ total }}</span>
+                            </div>
+                            <div class="order-details__count__single">
+                                <h5>Shipping</h5>
+                                <span class="price">&#8377; {{ shipping }}</span>
+                            </div>
+                        </div>
+                        <div class="ordre-details__total">
+                            <h5>Order total</h5>
+                            <span class="price">&#8377; {{ final_total }}</span>
+                        </div>
+
+                                                        <!-- Payment Button -->
+                                <form method="post" action="{% url 'products:checkout' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-12" style="text-align: center;">
+                                            <button type="submit" name="process_payment" class="btn btn-primary" style="margin: 0 auto;">Proceed to Payment</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Checkout Area -->
+{% endblock %}
+</body>
+</html>

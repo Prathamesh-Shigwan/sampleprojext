@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <form id="payment-form" method="POST" action="{{ callback_url }}">
+        {% csrf_token %}
+        <script>
+            var options = {
+                "key": "{{ razorpay_merchant_key }}", // Enter the Key ID generated from the Dashboard
+                "amount": "{{ amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 means 50000 paise or ₹500.
+                "currency": "{{ currency }}",
+                "name": "Your Company Name",
+                "description": "Purchase Description",
+                "order_id": "{{ razorpay_order_id }}", // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                    document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                    document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                    document.getElementById('payment-form').submit();
+                },
+                "theme": {
+                    "color": "#F37254"
+                },
+                "modal": {
+                    "ondismiss": function(){
+                        window.location.href = "{% url 'products:cart_view' %}"; // Redirect to the cart page on close
+                    }
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        </script>
+        <input type="hidden" id="razorpay_payment_id" name="razorpay_payment_id">
+        <input type="hidden" id="razorpay_order_id" name="razorpay_order_id">
+        <input type="hidden" id="razorpay_signature" name="razorpay_signature">
+    </form>
+</body>
+</html>

@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<section id="team" class="team">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <br>
+            <!-- Centered h3 tag using inline CSS -->
+            <h1 style="text-align: center;"><strong>Hyperdeck Controller</strong></h1>
+            <br>
+            <img src="{% static 'images/controller.png' %}" class="img-fluid animated" alt="">
+        </div>
+        <br>
+        <br>
+        <div class="row equal-height-columns">
+            <div class="col-md-6" data-aos="fade-right">
+                <h2><strong>Control Multiple HyperDecks with Ease</strong></h2>
+
+                <ul class="custom-paragraph">
+                    <br>
+                    <li><h3><strong>Centralized Control:</strong></h3> Effortlessly control and monitor multiple HyperDecks from a single, convenient interface.</li>
+                    <li><h3><strong>Network Flexibility:</strong></h3> Manage your HyperDecks over your existing LAN network or a dedicated Ethernet connection.</li>
+                    <li><h3><strong>Efficient File Management:</strong></h3> Seamlessly transfer recorded files to your local storage, freeing up space on HyperDeck SD cards and SSD drives.</li>
+                    <li><h3><strong>Streamlined Workflow:</strong></h3> Automatically delete recordings from HyperDeck media after transfer, saving you time and storage space management.</li>
+                    <li><h3><strong>Broad Compatibility:</strong></h3> Works seamlessly with all models of Blackmagic Design HyperDecks.</li>
+                </ul>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <h3>Features</h3>
+                <ul class="custom-paragraph">
+                    <li><h3><strong>Master Control:</strong></h3> Take command! The master button allows you to control recording, playback, and other functions on all connected HyperDecks simultaneously.</li>
+                    <li><h3><strong> File Management:</strong></h3> Simplify your workflow with one-click options. Download files directly to your local storage or permanently delete them from SD cards and SSD drives.</li>
+                    <li><h3><strong>Independent Control:</strong></h3> Need more granular control? Utilize the download-only and delete-only buttons to manage individual HyperDecks as needed.</li>
+                    <li><h3><strong>Synchronized Recording:</strong></h3> Ensure perfect timing across your production with adjustable delays between multiple HyperDecks.</li>
+                    <li><h3><strong>Flexible Clip Management:</strong></h3> Change clip cut duration anytime, adapting to your evolving project requirements.</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="btn-wrap">
+            <a href="#" class="btn-buy">Download Manual</a>
+        </div>
+        <br>
+    </div>
+</section><!-- End Hero -->
+
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="section-title">
+            <h2 style="text-align: center;"><strong>Pricing</strong></h2>
+            <br>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="box" data-aos="zoom-in-right" data-aos-delay="200">
+              <h3>Free Demo</h3>
+              <h4><sup>&#8377; </sup>0<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li class="na">Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Contact US</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended" data-aos="zoom-in" data-aos-delay="100">
+              <h3>Business</h3>
+              <h4><sup>&#8377; </sup>19<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li class="na">Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Contact US</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box" data-aos="zoom-in-left" data-aos-delay="200">
+              <h3>Developer</h3>
+              <h4><sup>&#8377; </sup>29<span> / month</span></h4>
+              <ul>
+                <li>Aida dere</li>
+                <li>Nec feugiat nisl</li>
+                <li>Nulla at volutpat dola</li>
+                <li>Pharetra massa</li>
+                <li>Massa ultricies mi</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="#" class="btn-buy">Contact US</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+<br>
+      </div>
+
+        <style>
+            /*--------------------------------------------------------------
+# Pricing
+--------------------------------------------------------------*/
+.pricing .box {
+  padding: 20px;
+  background: #121212;
+  text-align: center;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #f9f9f9;
+}
+
+.pricing .box h3 {
+  font-weight: 400;
+  padding: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.pricing .box h4 {
+  font-size: 42px;
+  color: #3498db;
+  font-weight: 500;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 20px;
+}
+
+.pricing .box h4 sup {
+  font-size: 20px;
+  top: -15px;
+  left: -3px;
+}
+
+.pricing .box h4 span {
+  color: #bababa;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.pricing .box ul {
+  padding: 0;
+  list-style: none;
+  color: #ffffff;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.pricing .box ul li {
+  padding-bottom: 16px;
+}
+
+.pricing .box ul i {
+  color: #3498db;
+  font-size: 18px;
+  padding-right: 4px;
+}
+
+.pricing .box ul .na {
+  color: #ccc;
+  text-decoration: line-through;
+}
+
+.pricing .box .btn-wrap {
+  padding: 15px;
+  text-align: center;
+}
+
+.pricing .box .btn-buy {
+  display: inline-block;
+  padding: 10px 40px 12px 40px;
+  border-radius: 50px;
+  border: 2px solid #3498db;
+  color: #3498db;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.pricing .box .btn-buy:hover {
+  background: #3498db;
+  color: #fff;
+}
+
+.pricing .recommended {
+  border-color: #3498db;
+}
+
+.pricing .recommended .btn-buy {
+  background: #3498db;
+  color: #fff;
+}
+
+.pricing .recommended .btn-buy:hover {
+  background: #2383c4;
+  border-color: #2383c4;
+}
+
+        </style>
+    </section><!-- End Pricing Section -->
+{% endblock %}

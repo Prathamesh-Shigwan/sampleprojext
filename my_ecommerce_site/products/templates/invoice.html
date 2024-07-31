@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    {% block title %}Product Details{% endblock %}
+</head>
+
+{% block content %}
+<body style="font-family: Arial, sans-serif; line-height: 1.5; margin: 0; padding: 20px; background-color: #f4f4f4;">
+<div style="max-width: 800px; margin: 0 auto; background-color: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <header>
+        <h1 style="color: #333;">Invoice</h1>
+        <address>
+            <p>Your Company Name</p>
+            <p>123 Company Address</p>
+            <p>City, State, Zip</p>
+        </address>
+    </header>
+    <article>
+        <h2 style="color: #333;">Shipping Adress</h2>
+        <address>
+            <p>Customer Name</p>
+            <p>123 Customer Address</p>
+            <p>City, State, Zip</p>
+        </address>
+        <h2 style="color: #333;">Billing Adress</h2>
+        <address>
+            <p>Shipping Address</p>
+            <p>123 Customer Address</p>
+            <p>City, State, Zip</p>
+        </address>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>Invoice #</span></th>
+                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>1001</span></td>
+            </tr>
+            <tr>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>Date</span></th>
+                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>April 27, 2024</span></td>
+            </tr>
+            <tr>
+                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>Total Amount</span></th>
+                <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;"><span>&#8377; {{ final_total }}</span></td>
+            </tr>
+        </table>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Item</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Description</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Rate</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Quantity</th>
+                <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">{{ item.product.name }}</td>
+                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">Description of item #1</td>
+                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">&#8377; {{ item.product.price }}</td>
+                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">x {{ item.quantity }}</td>
+                <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd;">&#8377; {{ item.line_total }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <p>Additional information or legal text can go here.</p>
+    </footer>
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.print();" style="padding: 8px 16px; font-size: 16px; cursor: pointer;">Print Invoice</button>
+    </div>
+</div>
+<script>
+    function downloadPDF() {
+        // This function would use a method like jsPDF to download the HTML content as a PDF
+        // You would need to include the jsPDF library in your project
+        const jsPDF = window.jspdf.jsPDF;
+        const doc = new jsPDF();
+        doc.html(document.querySelector('.container'), {
+            callback: function (doc) {
+                doc.save('invoice.pdf');
+            },
+            x: 10,
+            y: 10
+        });
+    }
+</script>
+</body>
+</html>
+{% endblock %}
